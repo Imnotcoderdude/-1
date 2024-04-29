@@ -1,10 +1,13 @@
-package main.java.calculator;
+package test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+
+        Calculator calc = new Calculator(); // 객체 생성!
+
         Scanner sc = new Scanner(System.in);
         List<Double> save = new ArrayList<>(10); // ArrayList를 사용하여 결과를 저장함, 초기용량 10으로 설정
 
@@ -37,20 +40,20 @@ public class App {
             // 올바른 기호가 입력됬다면 연산 수행하는 반복문
             switch (oper) {
                 case "+":
-                    result = firstInt + secondInt; // 더하기 실행부분
+                    result = calc.add(firstInt, secondInt); // 더하기 실행부분 호출
                     break;
                 case "-":
-                    result = firstInt - secondInt; // 빼기 실행부분
+                    result = calc.sub(firstInt, secondInt); // 빼기 실행부분
                     break;
                 case "*":
-                    result = firstInt * secondInt; // 곱하기 실행부분
+                    result = calc.mul(firstInt, secondInt); // 곱하기 실행부분
                     break;
                 case "/":
                     if (secondInt == 0) {
                         System.out.println("두번째 숫자에는 0이 입력될 수 없습니다.");
                         continue; // 0이 입력되면 다시 처음으로
                     }
-                    result = firstInt / secondInt;
+                    result = calc.div(firstInt, secondInt);
                     break;
                 default:
                     System.out.println("올바른 연산기호를 입력하세요");
