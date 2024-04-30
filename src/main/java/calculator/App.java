@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+
+        Calculator calc = new Calculator(); // 객체 생성!
+
         Scanner sc = new Scanner(System.in);
         List<Double> save = new ArrayList<>(10); // ArrayList를 사용하여 결과를 저장함, 초기용량 10으로 설정
 
@@ -37,20 +40,20 @@ public class App {
             // 올바른 기호가 입력됬다면 연산 수행하는 반복문
             switch (oper) {
                 case "+":
-                    result = firstInt + secondInt; // 더하기 실행부분
+                    result = calc.add(firstInt, secondInt); // 더하기 실행부분 호출
                     break;
                 case "-":
-                    result = firstInt - secondInt; // 빼기 실행부분
+                    result = calc.sub(firstInt, secondInt); // 빼기 실행부분
                     break;
                 case "*":
-                    result = firstInt * secondInt; // 곱하기 실행부분
+                    result = calc.mul(firstInt, secondInt); // 곱하기 실행부분
                     break;
                 case "/":
                     if (secondInt == 0) {
                         System.out.println("두번째 숫자에는 0이 입력될 수 없습니다.");
                         continue; // 0이 입력되면 다시 처음으로
                     }
-                    result = firstInt / secondInt;
+                    result = calc.div(firstInt, secondInt);
                     break;
                 default:
                     System.out.println("올바른 연산기호를 입력하세요");
@@ -68,35 +71,39 @@ public class App {
             System.out.println("");
 
             // 추가로 입력하는 부분 출력후 입력받기.
-            System.out.println("계속하려면 1 입력 : ");
-            System.out.println("계산기를 종료하려면 exit 입력 : ");
-            System.out.println("배열의 첫번째 제거하려면 remove 입력 : ");
-            System.out.println("저장된 결과 조회 inquiry 입력 : ");
-            String action = sc.next();
+
 
             // 사용자가 추가로 입력하는 것에 따라서 그에 맞는 작업 실행하는 제어문
-            switch (action) {
-                case "1":// 1을 입력받으면 루프를 반복한다.
-                    break;
-                case "exit": // exit을 입력받으면 루프를 깨고 계산기를 종료한다.
-                    System.out.println("계산기 종료");
-                    return;
-                case "remove": // remove를 입력받으면 배열의 0번째 요소 삭제 실행.
-                    if (!save.isEmpty()) {// save 배열
-                        save.remove(0); // 삭제 실행 부분
-                        System.out.println("배열의 첫번째 요소가 삭제되었습니다.");
-                    } else { // 저장된 배열의 값이 없으면 출력됨
-                        System.out.println("저장된 결과가 없습니다.");
-                    }
-                    break;
-                case "inquiry" :
-                    System.out.println("저장된 결과들 ");
-                    for (Double savedResult : save) {
-                        System.out.println(savedResult);
-                    } break;
-                default:
-                    System.out.println("올바른 입력을 하세요");
-                    break;
+            A: while (true) {
+                System.out.println("계속하려면 1 입력 : ");
+                System.out.println("계산기를 종료하려면 exit 입력 : ");
+                System.out.println("배열의 첫번째 제거하려면 remove 입력 : ");
+                System.out.println("저장된 결과 조회 inquiry 입력 : ");
+                String action = sc.next();
+
+                switch (action) {
+                    case "1":// 1을 입력받으면 루프를 반복한다.
+                        break A;
+                    case "exit": // exit을 입력받으면 루프를 깨고 계산기를 종료한다.
+                        System.out.println("계산기 종료");
+                        return;
+                    case "remove": // remove를 입력받으면 배열의 0번째 요소 삭제 실행.
+                        if (!save.isEmpty()) {// save 배열
+                            save.remove(0); // 삭제 실행 부분
+                            System.out.println("배열의 첫번째 요소가 삭제되었습니다.");
+                        } else { // 저장된 배열의 값이 없으면 출력됨
+                            System.out.println("저장된 결과가 없습니다.");
+                        }
+                        break;
+                    case "inquiry" :
+                        System.out.println("저장된 결과들 ");
+                        for (Double savedResult : save) {
+                            System.out.println(savedResult);
+                        } break;
+                    default:
+                        System.out.println("올바른 입력을 하세요");
+                        break;
+                }
             }
         }
     }
